@@ -1,10 +1,10 @@
 require('spec_buddy')
 
 describe('Stylist') do
-  describe('#stylist_name') do
+  describe('#name') do
     it('will return the name of the stylist') do
       stylist1 = Stylist.new({:name => "Yo Mama"})
-      expect(stylist1.stylist_name()).to(eq("Yo Mama"))
+      expect(stylist1.name()).to(eq("Yo Mama"))
     end
   end
 
@@ -36,11 +36,29 @@ describe('Stylist') do
       stylist1.save()
       stylist2 = Stylist.new({:name => "the Def Leppard hair helpers"})
       stylist2.save()
-      expect(Stylist.find(stylist2.stylist_id())).to(eq(stylist2))
+      expect(Stylist.find(stylist2.id())).to(eq(stylist2))
     end
   end
 
-  describe('.client_list') do
-
+  describe('#add_client') do
+    it('connects a client to a specific stylist') do
+      stylist1 = Stylist.new({:name => "Harry Barber"})
+      stylist1.save()
+      client1 = Client.new({:name => "Ron Weasley-Grainger"})
+      client1.save()
+      expect(stylist1.add_client(client1)).to(be_an_instance_of(Fixnum))
+    end
   end
+
+  # describe('#client_list') do
+  #   it('connects a client to a specific stylist') do
+  #     stylist1 = Stylist.new({:name => "Harry Barber"})
+  #     stylist1.save()
+  #     client1 = Client.new({:name => "Ron Weasley-Grainger"})
+  #     client1.save()
+  #     stylist1.add_client(client1)
+  #     expect(stylist1.client_list()).to(eq([client1]))
+  #   end
+  # end
+
 end

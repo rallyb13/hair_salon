@@ -1,10 +1,10 @@
 require('spec_buddy')
 
 describe('Client') do
-  describe('#client_name') do
+  describe('#name') do
     it('will identify the name of the client') do
       test_client = Client.new({:name => "Cher"})
-      expect(test_client.client_name()).to(eq("Cher"))
+      expect(test_client.name()).to(eq("Cher"))
     end
   end
 
@@ -36,7 +36,17 @@ describe('Client') do
       test_client.save()
       test_client2 = Client.new({:name => "Kelly Kapowski"})
       test_client2.save()
-      expect(Client.find(test_client2.client_id())).to(eq(test_client2))
+      expect(Client.find(test_client2.id())).to(eq(test_client2))
+    end
+  end
+
+  describe('#add_stylist') do
+    it('adds the specific stylist chosen by the client to the client database') do
+      client1 = Client.new({:name => "Maurice"})
+      client1.save()
+      stylist1 = Stylist.new({:name => "Wild Things"})
+      stylist1.save()
+      expect(client1.add_stylist(stylist1)).to(be_an_instance_of(Fixnum))
     end
   end
 
