@@ -30,4 +30,14 @@ describe('Client') do
     end
   end
 
+  describe('.find') do
+    it("finds a client by that client's unique id") do
+      test_client = Client.new({:name => "Dustin Diamond"})
+      test_client.save()
+      test_client2 = Client.new({:name => "Kelly Kapowski"})
+      test_client2.save()
+      expect(Client.find(test_client2.client_id())).to(eq(test_client2))
+    end
+  end
+
 end

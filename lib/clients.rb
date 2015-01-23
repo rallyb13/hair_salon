@@ -27,7 +27,15 @@ class Client
     @client_id = to_database.first().fetch('client_id').to_i()
   end
 
-
+  define_singleton_method(:find) do |search_id|
+    found_client = nil
+    Client.all().each() do |client|
+      if client.client_id().==(search_id)
+        found_client = client
+      end
+    end
+    found_client
+  end
 
 
 
