@@ -30,6 +30,14 @@ describe('Stylist') do
     end
   end
 
+  describe('#id') do
+    it('will return the id of the stylist') do
+      stylist1 = Stylist.new({:name => "Yogi Haira"})
+      stylist1.save()
+      expect(stylist1.id()).to(be_an_instance_of(Fixnum))
+    end
+  end
+
   describe('.find') do
     it('finds a specific stylist by his/her unique id') do
       stylist1 = Stylist.new({:name => "the Motley Crue crew"})

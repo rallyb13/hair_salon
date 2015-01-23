@@ -1,0 +1,17 @@
+<h2>Welcome to <%= @stylist.name() %>'s client listing page.</h2>
+
+<% if @clients.any?() %>
+<ul>
+  <% @clients.each() do |client| %>
+  <li><%= client.name() %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>Well, you know what they say: Hair today, gone tomorrow...</p>
+<% end %>
+
+<form action="/add_clients" method="post">
+  <label for="client_name">Add a new client!</label>
+  <input type="text" name="client_name">
+  <button type="submit">Add!</button>
+</form>

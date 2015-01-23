@@ -1,1 +1,17 @@
 <h1>Welcome to Salon For Now</h1>
+
+<% if @stylists.any?() %>
+  <ul>
+    <% @stylists.each() do |stylist| %>
+      <li><a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %></a></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>You really need to add some style  ...ists!</p>
+<% end %>
+
+<form action="/add_stylists" method="post">
+  <label for="sytlist_name">Add a new stylist:</label>
+  <input name="stylist_name" type="text">
+  <button type="submit">Add</button>
+</form>
