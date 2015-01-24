@@ -35,23 +35,20 @@ class Stylist
     end
   end
 
-  define_method(:add_client) do |new_client|
-    joining = DB.exec("INSERT INTO clients_stylists (client_id, stylist_id) VALUES ('#{new_client.id()}', '#{self.id()}') RETURNING id;")
-    join_id = joining.first().fetch("id").to_i()
-  end
-
-
-  # define_method(:client_list) do
-  #   my_clients = []
-  #   from_tables = DB.exec("SELECT clients.* FROM
-  #     stylists JOIN clients_stylists ON (stylists.stylist_id() = clients_stylists.id())
-  #     JOIN clients ON (clients_stylists.id() = clients.client_id())
-  #     WHERE stylists.stylist_id() = #{self.stylist_id()};")
-  #   from_tables.each() do |client|
-  #     name = client.fetch('client_name')
-  #     id = client.fetch('client_id').to_i()
-  #     my_clients.push(Client.new({:name => name, :id => id}))
-  #   end
-  #   my_clients
+  # define_method(:add_client) do |new_client|
+  #   joining = DB.exec("INSERT INTO clients_stylists (client_id, stylist_id) VALUES ('#{new_client.id()}', '#{self.id()}') RETURNING id;")
+  #   join_id = joining.first().fetch("id").to_i()
   # end
+
+#
+  define_method(:client_list) do
+    my_clients = []
+    from_tables = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()};")
+    from_tables.each() do |client|
+      name = client.fetch('name')
+      stylist_id = client.fetch('stylist_id').to_i()
+      my_clients.push(Client.new({:name => name, :stylist_id => stylist_id}))
+    end
+    my_clients
+  end
 end

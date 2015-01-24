@@ -48,25 +48,26 @@ describe('Stylist') do
     end
   end
 
-  describe('#add_client') do
-    it('connects a client to a specific stylist') do
-      stylist1 = Stylist.new({:name => "Harry Barber"})
-      stylist1.save()
-      client1 = Client.new({:name => "Ron Weasley-Grainger"})
-      client1.save()
-      expect(stylist1.add_client(client1)).to(be_an_instance_of(Fixnum))
-    end
-  end
-
-  # describe('#client_list') do
+  # describe('#add_client') do
   #   it('connects a client to a specific stylist') do
   #     stylist1 = Stylist.new({:name => "Harry Barber"})
   #     stylist1.save()
   #     client1 = Client.new({:name => "Ron Weasley-Grainger"})
   #     client1.save()
-  #     stylist1.add_client(client1)
-  #     expect(stylist1.client_list()).to(eq([client1]))
+  #     expect(stylist1.add_client(client1)).to(be_an_instance_of(Fixnum))
   #   end
   # end
+
+  describe('#client_list') do
+    it('gives the list of clients who use a specific stylist') do
+      stylist1 = Stylist.new({:name => "Harry Barber", :id => nil})
+      stylist1.save()
+      client1 = Client.new({:name => "Ron Weasley-Grainger", :stylist_id => stylist1.id()})
+      client1.save()
+      client2 = Client.new({:name => "Hermoine The Great", :stylist_id => stylist1.id()})
+      client2.save()
+      expect(stylist1.client_list()).to(eq([client1, client2]))
+    end
+  end
 
 end
