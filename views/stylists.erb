@@ -1,15 +1,5 @@
 <h2>Welcome to <%= @stylist.name() %>'s client listing page.</h2>
 
-<% if @stylist.client_list().any?() %>
-<ul>
-  <% @stylist.client_list.().each() do |client| %>
-  <li><%= client.name() %></li>
-  <% end %>
-</ul>
-<% else %>
-<p>Well, you know what they say: Hair today, gone tomorrow...</p>
-<% end %>
-
 <form action="/client_list" method="post">
   <input name="stylist_id" type="hidden" value = "<%= @stylist.id() %>">
 
@@ -18,3 +8,16 @@
 
   <button type="submit">Add!</button>
 </form>
+
+<% if @stylist.client_list().any?() %>
+<ul>
+  <% @stylist.client_list().each() do |client| %>
+  <li><%= client.name() %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>Well, you know what they say: Hair today, gone tomorrow...</p>
+<% end %>
+
+</br>
+<a href="/">Back to the Stylists!</a>
